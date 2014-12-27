@@ -32,9 +32,13 @@ class DistributedEvent(DistributedObject, FSM):
 
     def joinEvent(self):
         self.sendUpdate('joinEvent', [base.localAvatar.doId])
+        base.localAvatar.eventActive = True
+        base.localAvatar.obscureClarabelleButton(1)
 
     def leaveEvent(self):
         self.sendUpdate('leaveEvent', [base.localAvatar.doId])
+        base.localAvatar.eventActive = False
+        base.localAvatar.obscureClarabelleButton(-1)
 
     def setState(self, state, timestamp):
         self.request(state, timestamp)

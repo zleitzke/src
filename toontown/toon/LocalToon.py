@@ -175,6 +175,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.oldPos = None
             self.questMap = None
             self.prevToonIdx = 0
+            self.eventActive = False
 
     def setDNA(self, dna):
         base.localAvatarStyle = dna
@@ -1229,6 +1230,8 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         if not hasPhase:
             return
         if not self.friendsListButtonActive or self.friendsListButtonObscured > 0:
+            return
+        if self.eventActive:
             return
         self.gotCatalogNotify = 0
         currentWeek = self.catalogScheduleCurrentWeek - 1
