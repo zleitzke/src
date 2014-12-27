@@ -38,6 +38,7 @@ class DistributedEvent(DistributedObject, FSM):
     def leaveEvent(self):
         self.sendUpdate('leaveEvent', [base.localAvatar.doId])
         base.localAvatar.eventActive = False
+        base.localAvatar.obscureClarabelleButton(-1)
 
     def setState(self, state, timestamp):
         self.request(state, timestamp)
