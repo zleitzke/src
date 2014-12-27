@@ -1232,7 +1232,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         if not self.friendsListButtonActive or self.friendsListButtonObscured > 0:
             return
         if self.eventActive:
-        	return
+            return
         self.gotCatalogNotify = 0
         currentWeek = self.catalogScheduleCurrentWeek - 1
         if currentWeek < 57:
