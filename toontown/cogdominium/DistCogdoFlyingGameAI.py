@@ -57,6 +57,10 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
             self.handleLandOnWinPlatform(avId)
         elif action == CogdoFlyingGameGlobals.AI.GameActions.WinStateFinished:
             self.handleWinStateFinished(avId)
+        elif action == CogdoFlyingGameGlobals.AI.GameActions.SetBlades:
+            self.handleSetBlades(avId, data)
+        elif action == CogdoFlyingGameGlobals.AI.GameActions.BladeLost:
+            self.handleBladeLost(avId)
 
     def handleEnterEagleInterest(self, avId, eagleId):
         # Check if the eagle is in the eagleCooldown mode
@@ -126,6 +130,14 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
 
             # Looks like all the players have won, lets request the Finish state.
             self.fsm.request('Finish')
+
+    def handleSetBlades(self, avId, data):
+        # Set the player's blades
+        self.d_toonSetBlades(avId, data)
+
+    def handleBladeLost(self, avId):
+        # Remove a blade from the player
+        self.d_toonBladeLost(avId)
 
     def requestPickUp(self, pickupNum, pickupType):
         # Get the sender's avId
@@ -197,8 +209,8 @@ class DistCogdoFlyingGameAI(DistCogdoGameAI):
     def d_toonSpawn(self, avId):
         self.sendUpdate('toonSpawn', [avId, self.getNetworkTime()])
 
-    def toonSetBlades(self, todo0, todo1):
-        pass
+    def d_toonSetBlades(self, avId, data):
+        self.sendUpdate('toonSetBlades', [avId, data])
 
-    def toonBladeLost(self, todo0):
-        pass
+    def d_toonBladeLost(self, avId):
+        self.sendUpdate('toonBladeLost', [avId])
