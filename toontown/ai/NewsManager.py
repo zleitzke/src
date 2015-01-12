@@ -271,6 +271,9 @@ class NewsManager(DistributedObject.DistributedObject):
                 if hasattr(base, 'localAvatar') and base.localAvatar and hasattr(base.localAvatar, 'chatMgr') and base.localAvatar.chatMgr:
                     self.setIdesOfMarchStart()
                     base.localAvatar.chatMgr.chatInputSpeedChat.addIdesOfMarchMenu()
+            elif holidayId == ToontownGlobals.BRANDON_BIRTHDAY_EVENT:
+                if hasattr(base, 'localAvatar') and base.localAvatar and hasattr(base.localAvatar, 'chatMgr') and base.localAvatar.chatMgr:
+                    base.localAvatar.chatMgr.chatInputSpeedChat.addSellbotFieldOfficeMenu()
             elif holidayId == ToontownGlobals.EXPANDED_CLOSETS:
                 self.setExpandedClosetsStart()
             elif holidayId == ToontownGlobals.KARTING_TICKETS_HOLIDAY:
@@ -557,6 +560,9 @@ class NewsManager(DistributedObject.DistributedObject):
 
     def setIdesOfMarchStart(self):
         base.localAvatar.setSystemMessage(0, TTLocalizer.IdesOfMarchStart)
+
+    def setBrandonBirthdayStart(self):
+        base.localAvatar.setSystemMessage(0, TTLocalizer.BrandonBirthdayStart)
 
     def holidayNotify(self):
         for id in self.holidayIdList:
